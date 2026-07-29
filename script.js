@@ -1,4 +1,5 @@
-const API = "http://localhost:3000/animals";
+//const API = "http://localhost:3000/animals";
+const API = "https://backend-animals-i5yl.onrender.com/animals";
 
 const form = document.getElementById("animalForm");
 const table = document.getElementById("animalTable");
