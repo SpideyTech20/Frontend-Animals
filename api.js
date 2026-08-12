@@ -1,31 +1,27 @@
 const API_URL = "http://localhost:5000";
 
-export function getAccessToken() {
-    return localStorage.getItem("accessToken");
-}
+export async function apiFetch(endpoint, options = {}) {
+    const token = localStorage.getItem("accessToken");
 
-export async function apiFetch(path, options = {}) {
-
-    const token = getAccessToken();
-
-    const headers = new Headers(options.headers ?? {});
+    const headers = {
+        "Content-Type": "application/json",
+        ...options.headers
+    };
 
     if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
+        headers.Authorization = `Bearer ${token}`;
     }
 
-    if (options.body && !headers.has("Content-Type")) {
-        headers.set("Content-Type", "application/json");
-    }
-
-    const response = await fetch(`${API_URL}${path}`, {
+    const response = await fetch(`${API_URL}${endpoint}`, {
         ...options,
         headers
     });
 
+    // Token is invalid/expired
     if (response.status === 401) {
         localStorage.removeItem("accessToken");
         window.location.href = "./login.html";
+        return response;
     }
 
     return response;
