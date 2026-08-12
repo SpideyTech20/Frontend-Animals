@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Animal Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Animal Keeper</h1>
+
+    <form id="animalForm">
+
+        <input
+            type="hidden"
+            id="animalId"
+        >
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Animal Name"
+            required
+        >
+
+        <input
+            type="number"
+            id="numLegs"
+            placeholder="Number of Legs"
+            min="0"
+            required
+        >
+
+        <button type="submit">
+            Save Animal
+        </button>
+
+    </form>
+
+    <p id="message"></p>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Legs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="animalTable">
+            <tr>
+                <td colspan="4">Loading animals...</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
