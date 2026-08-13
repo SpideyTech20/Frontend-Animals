@@ -117,7 +117,7 @@ function displayAnimals(animals) {
 
 
 // ==================================================
-// POST - ADD ANIMAL  ✅ FIXED - ADDED THIS FUNCTION
+// POST - ADD ANIMAL  ✅ FIXED - Added this function
 // ==================================================
 
 async function addAnimal(name, numLegs) {
@@ -175,7 +175,7 @@ async function addAnimal(name, numLegs) {
 
 
 // ==================================================
-// PUT - UPDATE ANIMAL (ONLY ONE VERSION - KEPT THE CORRECT ONE)
+// PUT - UPDATE ANIMAL  ✅ KEPT ONLY ONE (the correct one)
 // ==================================================
 
 async function updateAnimal(id, name, numLegs) {
