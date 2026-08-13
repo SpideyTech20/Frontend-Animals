@@ -7,24 +7,30 @@
 </head>
 <body>
 
-   <form id="login-form">
+    <h1>Login</h1>
 
-    <input
-        id="email"
-        type="email"
-        placeholder="Enter your email"
-        required>
+    <form id="login-form">
+        <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required>
 
-    <input id="username" type="text" placeholder="Enter your username" required>
+        <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            required>
 
-    <button type="submit">
-        Log In
-    </button>
+        <button type="submit">
+            Log In
+        </button>
+    </form>
 
-</form>
+    <p id="message"></p>
 
-<p id="message"></p>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
 
-<script type="module" src="login.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
