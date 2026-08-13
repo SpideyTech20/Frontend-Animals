@@ -85,31 +85,37 @@ function displayAnimals(animals) {
 
         const row = document.createElement("tr");
 
+        const id = animal.id ?? animal._id ?? "";
+        const animalName = animal.name ?? animal.title ?? "";
+        const legs = animal.num_legs ?? animal.numLegs ?? "";
+
         row.innerHTML = `
-            <td>${animal.id}</td>
-
-            <td>${animal.name}</td>
-
-            <td>${animal.num_legs}</td>
-
-            <td>
-
-                <button
-                    onclick="editAnimal(
-                        ${animal.id},
-                        '${animal.name}',
-                        ${animal.num_legs}
-                    )">
-                    Edit
-                </button>
-
-                <button
-                    onclick="deleteAnimal(${animal.id})">
-                    Delete
-                </button>
-
-            </td>
+            <td>${id}</td>
+            <td></td>
+            <td>${legs}</td>
+            <td></td>
         `;
+
+        // set name safely
+        const nameCell = row.children[1];
+        nameCell.textContent = animalName;
+
+        const actionsCell = row.children[3];
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", () => {
+            editAnimal(id, animalName, legs);
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.addEventListener("click", () => {
+            deleteAnimal(id);
+        });
+
+        actionsCell.appendChild(editBtn);
+        actionsCell.appendChild(delBtn);
 
         animalTable.appendChild(row);
     });
@@ -298,7 +304,7 @@ function editAnimal(id, name, numLegs) {
 
     nameInput.value = name;
 
-    numLegsInput.value = numLegs;
+    numLegsInput.value = numLegs ?? "";
 
     nameInput.focus();
 

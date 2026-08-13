@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Redirect to main page
             setTimeout(() => {
-                window.location.href = "/";  // or "./index.html"
+                window.location.href = "./index.html";
             }, 1000);
 
         } catch (err) {
