@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://backend-animals-manager.onrender.com/";
 
 const animalForm = document.getElementById("animalForm");
 const animalId = document.getElementById("animalId");
@@ -117,9 +117,10 @@ async function addAnimal(name, numLegs) {
 
         const token = localStorage.getItem("accessToken");
 
-        const response = await fetch(
-            "http://localhost:5000/animals",
-            {
+        //  NEW
+const response = await fetch(
+    `${API_URL}/animals`,
+    {
                 method: "POST",
 
                 headers: {
