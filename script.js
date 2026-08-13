@@ -1,4 +1,4 @@
-const API_URL = "https://backend-animals-manager.onrender.com/";
+const API_URL = "https://backend-animals-manager.onrender.com";
 
 const animalForm = document.getElementById("animalForm");
 const animalId = document.getElementById("animalId");
