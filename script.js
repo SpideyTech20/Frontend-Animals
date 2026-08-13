@@ -120,57 +120,38 @@ function displayAnimals(animals) {
 // POST - ADD ANIMAL
 // ==================================================
 
-async function addAnimal(name, numLegs) {
-
+async function updateAnimal(id, name, numLegs) {
     try {
-
-        const token = localStorage.getItem("accessToken");
-
         const response = await fetch(
-            `${API_URL}/animals`,   // ✅ CHANGED to use API_URL
+            `${API_URL}/animals/${id}`,   // ✅ Use API_URL
             {
-                method: "POST",
-
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization":
-                        `Bearer ${localStorage.getItem("accessToken")}`
+                    "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
                 },
-
                 body: JSON.stringify({
                     name: name,
-                    num_legs: numLegs
+                    num_legs: numLegs    // ✅ Use num_legs (not "num legs")
                 })
             }
         );
 
         const data = await response.json();
 
-        console.log("POST response:", data);
-
         if (!response.ok) {
-
-            message.textContent =
-                data.message || "Failed to add animal.";
-
+            message.textContent = data.message || "Failed to update animal.";
             return;
         }
 
-        message.textContent =
-            "Animal added successfully!";
-
+        message.textContent = "Animal updated successfully!";
         animalForm.reset();
-
         animalId.value = "";
-
         await getAnimals();
 
     } catch (error) {
-
-        console.error("POST Error:", error);
-
-        message.textContent =
-            "Cannot connect to backend.";
+        console.error("PUT Error:", error);
+        message.textContent = "Cannot connect to backend.";
     }
 }
 
