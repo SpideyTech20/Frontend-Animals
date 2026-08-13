@@ -36,19 +36,19 @@ async function getAnimals() {
             }
         });
 
-        const data = await response.json();
+        // Safely parse response body (some endpoints return empty body)
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (e) { data = { raw: text }; }
 
-        console.log("GET response:", data);
+        console.log("GET response:", response.status, data);
 
         if (!response.ok) {
-
-            message.textContent =
-                data.message || "Failed to get animals.";
-
+            message.textContent = data.message || `Failed to get animals (${response.status})`;
             return;
         }
 
-        displayAnimals(data);
+        displayAnimals(Array.isArray(data) ? data : (data.animals ?? []));
 
     } catch (error) {
 
@@ -149,15 +149,14 @@ async function addAnimal(name, numLegs) {
             }
         );
 
-        const data = await response.json();
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (e) { data = { raw: text }; }
 
-        console.log("POST response:", data);
+        console.log("POST response:", response.status, data);
 
         if (!response.ok) {
-
-            message.textContent =
-                data.message || "Failed to add animal.";
-
+            message.textContent = data.message || `Failed to add animal (${response.status})`;
             return;
         }
 
@@ -206,15 +205,14 @@ async function updateAnimal(id, name, numLegs) {
             }
         );
 
-        const data = await response.json();
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (e) { data = { raw: text }; }
 
-        console.log("PUT response:", data);
+        console.log("PUT response:", response.status, data);
 
         if (!response.ok) {
-
-            message.textContent =
-                data.message || "Failed to update animal.";
-
+            message.textContent = data.message || `Failed to update animal (${response.status})`;
             return;
         }
 
@@ -267,15 +265,14 @@ async function deleteAnimal(id) {
             }
         );
 
-        const data = await response.json();
+        const text = await response.text();
+        let data = {};
+        try { data = text ? JSON.parse(text) : {}; } catch (e) { data = { raw: text }; }
 
-        console.log("DELETE response:", data);
+        console.log("DELETE response:", response.status, data);
 
         if (!response.ok) {
-
-            message.textContent =
-                data.message || "Failed to delete animal.";
-
+            message.textContent = data.message || `Failed to delete animal (${response.status})`;
             return;
         }
 
