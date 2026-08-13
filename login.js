@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "https://backend-animals-manager.onrender.com";  // ← CHANGE
 
 const form = document.querySelector("#login-form");
 const message = document.querySelector("#message");
@@ -36,7 +36,7 @@ form.addEventListener("submit", async (e) => {
 
         localStorage.setItem("accessToken", data.accessToken || data.token);
 
-        window.location.href = "./animals.html";
+        window.location.href = "/";   // ← CHANGE to "/" or "./index.html"
 
     } catch (err) {
 

@@ -1,4 +1,12 @@
 const API_URL = "https://backend-animals-manager.onrender.com";
+// ==================================================
+// CHECK AUTH - Redirect to login if not logged in
+// ==================================================
+
+const token = localStorage.getItem("accessToken");
+if (!token) {
+    window.location.href = "/login.html";
+}
 
 const animalForm = document.getElementById("animalForm");
 const animalId = document.getElementById("animalId");
