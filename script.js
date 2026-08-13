@@ -1,4 +1,5 @@
 const API_URL = "https://backend-animals-manager.onrender.com";
+
 // ==================================================
 // CHECK AUTH - Redirect to login if not logged in
 // ==================================================
@@ -125,10 +126,9 @@ async function addAnimal(name, numLegs) {
 
         const token = localStorage.getItem("accessToken");
 
-        //  NEW
-const response = await fetch(
-    `${API_URL}/animals`,
-    {
+        const response = await fetch(
+            `${API_URL}/animals`,   // ✅ CHANGED to use API_URL
+            {
                 method: "POST",
 
                 headers: {
@@ -184,7 +184,7 @@ async function updateAnimal(id, name, numLegs) {
     try {
 
         const response = await fetch(
-            `http://localhost:5000/animals/${id}`,
+            `${API_URL}/animals/${id}`,   // ✅ CHANGED to use API_URL
             {
                 method: "PUT",
 
@@ -392,3 +392,17 @@ window.deleteAnimal = deleteAnimal;
 // ==================================================
 
 getAnimals();
+
+
+// ==================================================
+// LOGOUT BUTTON
+// ==================================================
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("accessToken");
+        window.location.href = "/login.html";
+    });
+}
