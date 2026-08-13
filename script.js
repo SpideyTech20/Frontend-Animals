@@ -117,47 +117,65 @@ function displayAnimals(animals) {
 
 
 // ==================================================
-// POST - ADD ANIMAL
+// POST - ADD ANIMAL  ✅ FIXED - ADDED THIS FUNCTION
 // ==================================================
 
-async function updateAnimal(id, name, numLegs) {
+async function addAnimal(name, numLegs) {
+
     try {
+
+        const token = localStorage.getItem("accessToken");
+
         const response = await fetch(
-            `${API_URL}/animals/${id}`,   // ✅ Use API_URL
+            `${API_URL}/animals`,
             {
-                method: "PUT",
+                method: "POST",
+
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+                    "Authorization": `Bearer ${token}`
                 },
+
                 body: JSON.stringify({
                     name: name,
-                    num_legs: numLegs    // ✅ Use num_legs (not "num legs")
+                    num_legs: numLegs
                 })
             }
         );
 
         const data = await response.json();
 
+        console.log("POST response:", data);
+
         if (!response.ok) {
-            message.textContent = data.message || "Failed to update animal.";
+
+            message.textContent =
+                data.message || "Failed to add animal.";
+
             return;
         }
 
-        message.textContent = "Animal updated successfully!";
+        message.textContent =
+            "Animal added successfully!";
+
         animalForm.reset();
+
         animalId.value = "";
+
         await getAnimals();
 
     } catch (error) {
-        console.error("PUT Error:", error);
-        message.textContent = "Cannot connect to backend.";
+
+        console.error("POST Error:", error);
+
+        message.textContent =
+            "Cannot connect to backend.";
     }
 }
 
 
 // ==================================================
-// PUT - UPDATE ANIMAL
+// PUT - UPDATE ANIMAL (ONLY ONE VERSION - KEPT THE CORRECT ONE)
 // ==================================================
 
 async function updateAnimal(id, name, numLegs) {
@@ -165,7 +183,7 @@ async function updateAnimal(id, name, numLegs) {
     try {
 
         const response = await fetch(
-            `${API_URL}/animals/${id}`,   // ✅ CHANGED to use API_URL
+            `${API_URL}/animals/${id}`,
             {
                 method: "PUT",
 
@@ -350,7 +368,7 @@ animalForm.addEventListener(
 
         } else {
 
-            await addAnimal(
+            await addAnimal(   // ✅ NOW THIS FUNCTION EXISTS!
                 name,
                 numLegs
             );
